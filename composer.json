@@ -1,0 +1,17 @@
+{
+    "name": "app/mvc",
+    "description": "Simple struct mvc",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "walesonn",
+            "email": "walesonmelo0000@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\": "App/"
+        }
+    }
+}
