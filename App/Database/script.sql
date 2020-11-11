@@ -1,11 +1,14 @@
-CREATE DATABASE IF NOT EXISTS Mymvc DEFAULT CHARACTER SET UTF8 COLLATE UTF8_UNICODE_CI;
+--Defina o seu banco de dados neste arquivo
 
-USE Mymvc;
+create database if not exists upload default character set utf8 collate utf8_unicode_ci;
 
-CREATE TABLE IF NOT EXISTS users (
-    id BIGINT(20) UNSIGNED  AUTO_INCREMENT,
-    nome VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    senha VARCHAR(32) NOT NULL,
-    PRIMARY KEY(id)
+use upload;
+
+create table imagens (
+    id int auto_increment,
+    nome varchar(100) not null,
+    tamanho decimal(7,2) not null,
+    endereco varchar(255) not null,
+    data_c date,
+    primary key(id)
 );

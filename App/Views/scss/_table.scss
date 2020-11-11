@@ -1,0 +1,36 @@
+.table-header{
+    width: 90%;
+    margin: 5px auto;
+    border: 0.5px solid whitesmoke;
+    padding: 9px;
+    background-color: aquamarine;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+table{
+    width: 90%;
+    margin: 0 auto;
+}
+
+td{
+    width: 200px;
+    height: 220px;
+    padding: 10px;
+    border: 1px solid black;
+    margin: 2px auto;
+    border-radius: 5px;
+}
+
+tr{
+    display: flex;
+    width: 100%;
+    flex-flow: row wrap;
+}
+
+@media (max-width: 600px){
+    td{
+        width: 95%;
+        height: 220px;
+    }
+}

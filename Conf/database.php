@@ -1,5 +1,5 @@
 <?php
 
-define("DB_HOST","mysql:host= Your host ;dbname= Your db name");
-define("USER_DB"," Your user ");
-define("PWD"," Your password ");
+define("DB_HOST","mysql:host=localhost;dbname=upload");
+define("USER_DB","root");
+define("PWD","");
