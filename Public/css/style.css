@@ -91,7 +91,7 @@ table {
 
 td {
   width: 200px;
-  height: 220px;
+  height: auto;
   padding: 10px;
   border: 1px solid black;
   margin: 2px auto;
