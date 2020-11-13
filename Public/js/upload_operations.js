@@ -6,7 +6,7 @@ $( function(){
         var formdata = new FormData(form);
 
         $response = $("#rsp");
-        
+
         $.ajax({
             url: "?p=upload",
             type: "POST",
@@ -16,33 +16,39 @@ $( function(){
             contentType: false,
             success: function(data)
             {
-                if(data == "err1")
+                if(data === "err1")
                 {
                     danger($response,"Erro ao fazer upload de arquivo");
+                    setTimeout(clear,5000);
                     return;
                 }
-                else if(data == "err2")
+                else if(data === "err2")
                 {
                     danger($response,"Erro ao salvar imagem no banco de dados");
+                    setTimeout(clear,5000);
                     return;
                 }
-                else if (data == "size")
+                else if (data === "size")
                 {
                     danger($response,"Tamanho do arquivo deve ser de no máximo 2MB");
+                    setTimeout(clear,5000);
                     return;
                 }
-                else if(data == "type")
+                else if(data === "type")
                 {
                     danger($response,"Tipo de arquivo não suportado. Tipos aceitos (PNG, GIF, JPEG)");
+                    setTimeout(clear,5000);
                     return;
                 }
                 else{
-                    $("html").html(data);
+                    $("body").html(data);
                     $("#rsp").html("Imagem salva com sucesso!").css({
                         backgroundColor: "lightgreen",
                         padding: "10px",
                         color: "white"
                     });
+
+                    setTimeout(clear,5000);
                 }
 
             },
@@ -55,6 +61,11 @@ $( function(){
         return false;
     });
 });
+
+function clear()
+{
+    $("#rsp").html("").css("padding","0px");
+}
 
 function danger(element, text)
 {
@@ -95,8 +106,9 @@ function apagar(n)
                 return;
             }
             else{
-                $("html").html(data);
-                sucesso($response,"Imagem deletada com sucesso!");
+                // document.location.href = "/";
+                setTimeout(sucesso($response,"Imagem deletada com sucesso!"),2000);
+                $("body").html(data);
             }
         },
         error: function()

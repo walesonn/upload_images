@@ -33,12 +33,14 @@ class HomeController extends Controller{
 
     public function verImagem()
     {
-        if(isset($_GET['n']) && is_numeric($_GET['n']))
+        if(isset($_GET['n']) && is_numeric($_GET['n']) && Img::all($_GET['n']))
         {
             $imagem = Img::all($_GET['n']);
+            return $this->view("imagem",['imagem'=>$imagem]);
         }
 
-        return $this->view("imagem",['imagem'=>$imagem]);
+        header("Location: /");
+        
     }
 
     public function delete()
@@ -58,6 +60,10 @@ class HomeController extends Controller{
             }
             echo "d1";
             return;
+        }
+        else
+        {
+            echo "Esta imagem ja foi apagada";
         }
     }
 }

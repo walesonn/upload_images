@@ -30,6 +30,7 @@ class File {
 
     public function create(File $file)
     {
+        
         if( move_uploaded_file( $file->getTmpName(), $file->getPath() . $file->getName() ) )
         {
             return true;

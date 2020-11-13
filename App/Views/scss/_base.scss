@@ -26,9 +26,18 @@ h2{
     text-align: center;
 }
 
+.flex{
+    display: flex;
+}
+
+.space-between{
+    justify-content: space-between;
+}
+
 i{
    padding: 15px;
    background-color: red;
+   border-bottom-right-radius: 20px;
    color: white;
    cursor: pointer;
    &:hover{
@@ -68,6 +77,18 @@ i{
 .btn-apagar{
     width: 100%;
     text-align: right;
+}
+
+.btn-voltar{
+    float: left;
+    background-color: lightgreen;
+    padding: 15px;
+    font-weight: 900;
+    border-bottom-left-radius: 20px;
+    a{
+        text-decoration: none;
+        color: grey;
+    }
 }
 
 @media (max-width:600px){
