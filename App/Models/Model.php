@@ -58,7 +58,7 @@ abstract class Model{
 
                 foreach($imagens as $imagem)
                 {
-                    $lista[] = new Img( $imagem->nome,$imagem->data_c,$imagem->tamanho, $imagem->endereco,$imagem->id );
+                    $lista[] = new Img( $imagem->nome,$imagem->data_c,$imagem->tamanho, $imagem->endereco,intval($imagem->id) );
                 }
                 return $lista;
             }

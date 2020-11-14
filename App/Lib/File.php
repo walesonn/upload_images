@@ -6,46 +6,56 @@ use App\Models\Img;
 
 class File {
 
-    private $nome;
+    private $name;
     private $size;
     private $type;
     private $tmp_name;
     private $path = UPLOAD_PATH;
 
-    public function __construct( string $nome, float $size, string $type, string $tmp_name )
+    public function __construct( string $name, float $size, string $type, string $tmp_name )
     {
-        $this->setNome($nome);
+        $this->setName($name);
         $this->setTmpName($tmp_name);
-
-        if(!$this->setSize($size))
-        {
-            die("size");
-        }
-
-        if(!$this->setType($type))
-        {
-            die("type");
-        }
+        $this->size = $this->setSize($size);
+        $this->type = $this->validType($type)? $type : die("type");
     }
 
     public function create(File $file)
     {
         
-        if( move_uploaded_file( $file->getTmpName(), $file->getPath() . $file->getName() ) )
+        if(move_uploaded_file($file->getTmpName(), $file->getPath() . $file->getName()))
         {
-            return true;
+            $image = $file->getPath() . $file->getName();
+            if(file_exists($image))
+            {
+                $image = imagecreatefromjpeg($image);
+                $width = imagesx($image);
+                $height = imagesy($image);
+                $width_new = (($width * 40) / 100);
+                $height_new = (($height * 40) / 100);
+                
+                $imgNova = imagecreatetruecolor( $width_new,$height_new );
+                // copia e redimensiona a imagem
+                if(imagecopyresampled($imgNova,$image,0,0,0,0,$width_new,$height_new,$width,$height) && unlink($file->getPath() . $file->getName()))
+                {
+                    imagejpeg($imgNova,$file->getPath() . $file->getName(),100);
+                    return true;
+                }
+                return false;
+            }
+            die("Arquivo não existe");
         }
-        die("Erro ao fazer upload de imagem");
+        die("Impossivel fazer upload error interno");
     }
 
     public function getName()
     {
-        return $this->nome;
+        return $this->name;
     }
 
     public function getSize()
     {
-        return $this->size;
+        return intval($this->size);
     }
 
     public function getTmpName()
@@ -63,35 +73,29 @@ class File {
         return $this->type;
     }
 
-    private function setNome( string $nome )
+    private function setName( string $nome )
     {
-        $this->nome = md5(rand(1, 100000)) . $nome;
+        $this->name = md5($nome). $nome;
     }
 
-    private function  setType( string $type )
+    private function validType(string $type)
     {
-        if( $type === "image/png" || $type === "image/jpeg" || $type === "image/gif")
+        if($type == "image/jpeg")
         {
-            $this->type = $type;
             return true;
         }
         return false;
     }
+
 
     private function setTmpName( string $tmp_name )
     {
         $this->tmp_name = $tmp_name;
     }
 
-    private function setSize( float $size )
+    private function setSize(float $size)
     {
-        if( ($size / 1024 ) < 2048 )
-        {
-            $this->size = number_format(($size / 1024),2);
-
-            return true;
-        }
-        return false;
+       return number_format(($size / 1024),2);
     }
 
     public static function delete(Img $file)

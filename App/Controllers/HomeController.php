@@ -18,7 +18,11 @@ class HomeController extends Controller{
         if(isset($_FILES))
         {   
             $data = date("Y-m-d");
-            $file = new File($_FILES['imagem']['name'], $_FILES['imagem']['size'], $_FILES['imagem']['type'], $_FILES['imagem']['tmp_name']);
+            $name = $_FILES['imagem']['name'];
+            $size = $_FILES['imagem']['size'];
+            $type =  $_FILES['imagem']['type'];
+            $tmp_name = $_FILES['imagem']['tmp_name'];
+            $file = new File($name, $size,$type, $tmp_name);
 
             if($file->create($file))
             {

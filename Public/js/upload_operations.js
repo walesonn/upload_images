@@ -36,7 +36,7 @@ $( function(){
                 }
                 else if(data === "type")
                 {
-                    danger($response,"Tipo de arquivo não suportado. Tipos aceitos (PNG, GIF, JPEG)");
+                    danger($response,"Tipo de arquivo não suportado. Tipo aceito (JPEG)");
                     setTimeout(clear,5000);
                     return;
                 }
