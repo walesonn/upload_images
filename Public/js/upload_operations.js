@@ -14,6 +14,10 @@ $( function(){
             dataType: "html",
             processData: false,
             contentType: false,
+            beforeSend:function()
+            {
+                $(".btn").val("processando...").attr("disabled",true);
+            },
             success: function(data)
             {
                 if(data === "err1")
