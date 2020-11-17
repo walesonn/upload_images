@@ -121,3 +121,24 @@ function apagar(n)
         }
     });
 }
+
+function girarImagem(direcao)
+{
+    nome_imagem = $("#nome_imagem").val();
+    id_imagem = $("#id").val();
+    $.ajax({
+        url: "?p=girarImagem&direcao=" + direcao + "&nome_imagem=" + nome_imagem + "&n=" +id_imagem,
+        type: "GET",
+        dataType: "html",
+        async:true,
+        success: function(data)
+        {   
+            $("body").html(data);
+            console.log(data)
+        },
+        error: function()
+        {
+            alert("Error interno");
+        }
+    });
+}

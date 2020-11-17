@@ -25,6 +25,9 @@ switch($page)
     case "delete":
         $controller->delete();
     break;
+    case "girarImagem":
+        $controller->girarImagem();
+    break;
     default:
         echo "<h1 style='color: grey; text-align: center; margin-top: 110px'>ERROR HTTP 404 PAGE NOT FOUND</h1>";
     break;

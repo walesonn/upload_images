@@ -31,14 +31,17 @@ class File {
                 $image = imagecreatefromjpeg($image);
                 $width = imagesx($image);
                 $height = imagesy($image);
-                $width_new = (($width * 40) / 100);
-                $height_new = (($height * 40) / 100);
+                $width_new = $width * 0.5;
+                $height_new = $height * 0.5;
                 
                 $imgNova = imagecreatetruecolor( $width_new,$height_new );
                 // copia e redimensiona a imagem
+                
                 if(imagecopyresampled($imgNova,$image,0,0,0,0,$width_new,$height_new,$width,$height) && unlink($file->getPath() . $file->getName()))
                 {
-                    imagejpeg($imgNova,$file->getPath() . $file->getName(),100);
+                    imagejpeg($imgNova,$file->getPath() . $file->getName(),75);
+                    imagedestroy($imgNova);
+                    imagedestroy($image);
                     return true;
                 }
                 return false;
@@ -75,7 +78,7 @@ class File {
 
     private function setName( string $nome )
     {
-        $this->name = md5($nome). $nome;
+        $this->name = md5(rand(1,1000)). $nome;
     }
 
     private function validType(string $type)

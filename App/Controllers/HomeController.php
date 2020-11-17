@@ -70,4 +70,27 @@ class HomeController extends Controller{
             echo "Esta imagem ja foi apagada";
         }
     }
+
+    public function girarImagem()
+    {
+        if(isset($_GET))
+        {
+            $imgOriginal = IMGS . $_GET['nome_imagem'];
+            if(file_exists($imgOriginal))
+            {
+                
+                $imgOriginal = imagecreatefromjpeg($imgOriginal);
+                $imgeRotate = ( $_GET['direcao'] == 'e')? imagerotate($imgOriginal,90,0): imagerotate($imgOriginal,-90,0);
+                if(imagejpeg($imgeRotate,IMGS . $_GET['nome_imagem']))
+                {
+                    imagedestroy($imgeRotate);
+                    imagedestroy($imgOriginal);
+                    return $this->index();
+                    
+                }
+                die("Imagem não existe no servidor");
+            }
+            die("Imagem não existe");
+        }
+    }
 }
