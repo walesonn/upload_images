@@ -23,24 +23,28 @@ $( function(){
                 if(data === "err1")
                 {
                     danger($response,"Erro ao fazer upload de arquivo");
+		    ativarBotao();
                     setTimeout(clear,5000);
                     return;
                 }
                 else if(data === "err2")
                 {
                     danger($response,"Erro ao salvar imagem no banco de dados");
+		    ativarBotao();
                     setTimeout(clear,5000);
                     return;
                 }
                 else if (data === "size")
                 {
                     danger($response,"Tamanho do arquivo deve ser de no máximo 2MB");
+		    ativarBotao();
                     setTimeout(clear,5000);
                     return;
                 }
                 else if(data === "type")
                 {
                     danger($response,"Tipo de arquivo não suportado. Tipo aceito (JPEG)");
+		    ativarBotao();
                     setTimeout(clear,5000);
                     return;
                 }
@@ -141,4 +145,9 @@ function girarImagem(direcao)
             alert("Error interno");
         }
     });
+}
+
+function ativarBotao()
+{
+	$(".btn").attr("disabled",false).val('Salvar');
 }

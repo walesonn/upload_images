@@ -1,4 +1,3 @@
---Defina o seu banco de dados neste arquivo
 
 create database if not exists upload default character set utf8 collate utf8_unicode_ci;
 
